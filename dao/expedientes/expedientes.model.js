@@ -11,7 +11,6 @@ class Expedientes{
             db = await getDb();
             if (process.env.MIGRATE === 'true') {
                         const createStatement = 'CREATE TABLE IF NOT EXISTS expedientes (id INTEGER PRIMARY KEY AUTOINCREMENT, identidad TEXT, fecha TEXT, descripcion TEXT, observacion TEXT, registro TEXT, ultimoActualizacion TEXT);';
-                        console.log('createStatement');
                         db.run(createStatement);
             }
         } catch (ex) {
