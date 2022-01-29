@@ -20,7 +20,7 @@ router.get('/', (req, res)=>{
 //*****METODO GET
 router.get('/all', async (req, res) =>{
     try {
-        const rows = await ExpedientesModel.getAll();
+        const rows = await ExpedienteModel.getAll();
         res.status(200).json({status:'ok', expedientes: rows});
     } catch (ex) {
         console.log(ex);
@@ -28,6 +28,24 @@ router.get('/all', async (req, res) =>{
     }
 });
 
+//*******************GET DE BUSQUEDA(METODO BUSCAR)
+//***********byid/1
+//***********byid/1:{id}
+router.get('/byid/:id', async (req, res) =>{
+    try {
+        const { id } = req.params;
+        const row = await ExpedienteModel.getById(parseInt(id));
+        res.status(200).json(
+            {
+                status: 'ok',
+                expedientes: row
+            }
+        );
+    } catch (ex) {
+        console.log(ex);
+        res.status(500).json({status: 'failed'});
+    }
+});
 
 //*****POST*****
 router.post('/new', async (req, res) =>{
@@ -50,6 +68,40 @@ router.post('/new', async (req, res) =>{
         );
     }
 });
+
+//********METODO ACTUALIZAR
+router.put('/update/:id', async (req, res) =>{
+    try {
+        const { identidad, fecha, descripcion, observacion, registro, ultimoActualizacion } = req.body;
+        const {id} = req.params;
+        const result = await ExpedienteModel.updateOne(id, identidad, fecha, descripcion, observacion, registro, ultimoActualizacion);
+        res.status(200).json({
+            status:'ok',
+            result
+        });
+    } catch (ex) {
+        console.log(ex);
+        res.status(500).json({status:'failed'});
+    }
+});
+
+//******METODO ELIMINAR/
+router.delete('/delete/:id', async (req, res) =>{
+    try {
+        const {id} = req.params;
+        const result = await ExpedienteModel.deleteOne(id);
+        res.status(200).json({
+            status:'ok',
+            result
+        });
+    } catch (ex) {
+        console.log(ex);
+        res.status(500).json({status:'failed'});
+    }
+});
+
+
+
 // router.post('/new', async (req, res)=>{
 //     const { identidad, fecha, descripcion, observacion, registro, ultimoActualizacion } = req.body;
 
@@ -66,5 +118,7 @@ router.post('/new', async (req, res) =>{
 //             }
 //         });
 // });
+
+
 
 module.exports = router;

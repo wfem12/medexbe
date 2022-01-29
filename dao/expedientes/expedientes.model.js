@@ -32,6 +32,7 @@ class Expedientes{
     //     .catch((err) => { console.error(err)});
     // }
 
+    //**********************************METODOS POST
     new ( identidad, fecha, descripcion, observacion, registro, ultimoActualizacion) {
         return new Promise( (accept, reject)=> {
         db.run(
@@ -79,7 +80,7 @@ class Expedientes{
         }
 
         //*****************************METODO DE ACTUALIZAR
-    updateOne (id, ) {
+    updateOne (id, identidad, fecha, descripcion, observacion, registro, ultimoActualizacion ) {
         return new Promise(
             (accept, reject) =>{
                 const sqlUpdate = 'UPDATE expedientes set identidad=?, fecha=?, descripcion=?, observacion=?, registro=?, ultimoActualizacion=? where id =?;';
