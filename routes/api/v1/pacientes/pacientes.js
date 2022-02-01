@@ -7,6 +7,14 @@ const Pacientes = new require('../../../../dao/pacientes/pacientes.model');
 const PacienteModel = new Pacientes();
 
 //*****GET*****
+// router.get('/', (req, res)=>{
+//     res.status(200).json(
+//         {
+//             endpoint: 'Pacientes',
+//             updates: new Date(2022,0,19,18,41,00)
+//         }
+//     );
+// });
 router.get('/', (req, res)=>{
     res.status(200).json(
         {
@@ -15,6 +23,7 @@ router.get('/', (req, res)=>{
         }
     );
 });
+
 
 //************GET ALL
 
