@@ -20,12 +20,12 @@ class Pacientes{
         db.run(
             'INSERT INTO pacientes (identidad, nombre, apellidos, email, telefono) VALUES (?, ?, ?, ?, ?);',
             [identidad, nombres, apellidos, correo, telefono],
-            (err, rslt)=>{
-            if(err) {
-                console.error(err);
-                reject(err);
-            }
-            accept(rslt);
+            function (err) {
+                if (err) {
+                    console.error(err);
+                    reject(err);
+                }
+                accept(this.lastID);
             }
         );
         });
