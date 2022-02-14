@@ -3,7 +3,7 @@ const req = require('express/lib/request');
 const res = require('express/lib/response');
 const router = express.Router();
 
-const Pacientes = require('../../../../dao/pacientes/pacientes.model');
+const Pacientes = require('../../../../dao/pacientes/pacientes.model.js.sqlite');
 const PacienteModel = new Pacientes();
 
 //*****GET*****
