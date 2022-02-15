@@ -61,6 +61,8 @@ class Pacientes{
 
     //*********************METODO DELETE(ELIMINAR)
     async deleteOne(id) {
+        const filter = {_id: new ObjectId(id)};
+        return await this.collection.deleteOne(filter);
     }
 }
 
