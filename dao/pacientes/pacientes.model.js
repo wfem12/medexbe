@@ -46,6 +46,17 @@ class Pacientes{
 
         //*****************************METODO DE ACTUALIZAR
     async updateOne(id, nombres, apellidos, identidad, telefono, correo) {
+        const filter = {_id: new ObjectId(id)};
+        const updateCmd = {
+            '$set':{
+                nombres,
+                apellidos,
+                identidad,
+                telefono,
+                correo
+            }
+        };
+        return await this.collection.updateOne(filter, updateCmd);
     }
 
     //*********************METODO DELETE(ELIMINAR)

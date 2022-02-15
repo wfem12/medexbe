@@ -74,24 +74,6 @@ router.post('/new', async (req, res) =>{
 });
 
 
-// router.post('/new', async (req, res)=>{
-//     const { nombres, apellidos, identidad, email, telefono } = req.body;
-//     rslt = await PacienteModel.new(nombres, apellidos, identidad, telefono, email);
-
-//     res.status(200).json(
-//         {
-//             status:'ok',
-//             recieved: {
-//                 nombres,
-//                 apellidos,
-//                 identidad,
-//                 //nombreCompleto: `${nombres} ${apellidos}`,
-//                 email,
-//                 telefono
-//             }
-//         });
-// });
-
 //*****ACTUALIZAR
 router.put('/update/:id', async (req, res) =>{
     try {
