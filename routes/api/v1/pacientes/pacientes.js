@@ -3,7 +3,7 @@ const req = require('express/lib/request');
 const res = require('express/lib/response');
 const router = express.Router();
 
-const Pacientes = require('../../../../dao/pacientes/pacientes.model.js.sqlite');
+const Pacientes = require('../../../../dao/pacientes/pacientes.model');
 const PacienteModel = new Pacientes();
 
 //*****GET*****
@@ -43,7 +43,7 @@ router.get('/all', async (req, res) =>{
 router.get('/byid/:id', async (req, res) =>{
     try {
         const { id } = req.params;
-        const row = await PacienteModel.getById(parseInt(id));
+        const row = await PacienteModel.getById(id);
         res.status(200).json({status:'ok', pacientes: row});
     } catch (ex) {
         console.log(ex);
