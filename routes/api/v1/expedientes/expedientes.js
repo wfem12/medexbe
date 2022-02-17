@@ -4,7 +4,7 @@ const res = require('express/lib/response');
 const router = express.Router();
 
 //RUTA EXPEDIENTE
-const Expedientes = require('../../../../dao/expedientes/expedientes.model');
+const Expedientes = require('../../../../dao/expedientes/expediente.model');
 const ExpedienteModel = new Expedientes();
 
 //*****GET*****
@@ -34,7 +34,7 @@ router.get('/all', async (req, res) =>{
 router.get('/byid/:id', async (req, res) =>{
     try {
         const { id } = req.params;
-        const row = await ExpedienteModel.getById(parseInt(id));
+        const row = await ExpedienteModel.getById(id);
         res.status(200).json(
             {
                 status: 'ok',

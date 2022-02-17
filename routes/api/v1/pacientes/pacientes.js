@@ -37,6 +37,45 @@ router.get('/all', async (req, res) =>{
     }
 });
 
+//************FACET SEARCH
+const allowedItemsNumber = [10, 15, 20];
+//facet search
+router.get('/facet/:page/:items', async (req, res) => {
+  const page = parseInt(req.params.page, 10);
+  const items = parseInt(req.params.items, 10);
+  if (allowedItemsNumber.includes(items)) {
+    try {
+      const pacientes = await PacienteModel.getFaceted(page, items);
+      res.status(200).json({docs:pacientes});
+    } catch (ex) {
+      console.log(ex);
+      res.status(500).json({ status: 'failed' });
+    }
+  } else {
+    return res.status(403).json({status:'error', msg:'Not a valid item value (10,15,20)'});
+  }
+
+});
+
+//POR NOMBRE
+router.get('/byname/:name/:page/:items', async (req, res) => {
+    const name = req.params.name;
+    const page = parseInt(req.params.page, 10);
+    const items = parseInt(req.params.items, 10);
+    if (allowedItemsNumber.includes(items)) {
+      try {
+        const pacientes = await pacienteModel.getFaceted(page, items, {nombres: name});
+        res.status(200).json({ docs: pacientes });
+      } catch (ex) {
+        console.log(ex);
+        res.status(500).json({ status: 'failed' });
+      }
+    } else {
+      return res.status(403).json({ status: 'error', msg: 'Not a valid item value (10,15,20)' });
+    }
+  
+  });
+
 //***********GET DE BUSQUEDA(METODO BUSCAR)
 //***********byid/1
 //***********byid/1:{id}
@@ -111,6 +150,5 @@ router.delete('/delete/:id', async (req, res) =>{
 // router.post(); // ENVIAR
 // router.put(); // MODIFICAR
 // router.delete(); // BORRAR
-
 
 module.exports = router;

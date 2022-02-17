@@ -54,7 +54,7 @@ getDb().then(
                 return;
             }
             console.log(reslts);
-            return
+            return;
         });
     }
 );
