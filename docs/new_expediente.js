@@ -23,6 +23,7 @@ const observation = [
         'Herida leve',
         'Muerto',
         'Tiene que ir a emergencia',
+        'falta de calcio'
 ];
 
 const Registration = [

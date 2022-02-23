@@ -28,6 +28,30 @@ router.get('/all', async (req, res) =>{
     }
 });
 
+//______________________________________//
+
+//************FACET SEARCH
+const allowedItemsNumber = [10, 15, 20];
+//facet search
+router.get('/facet/:page/:items', async (req, res) => {
+  const page = parseInt(req.params.page, 10);
+  const items = parseInt(req.params.items, 10);
+  if (allowedItemsNumber.includes(items)) {
+    try {
+      const expedientes = await ExpedienteModel.getFaceted(page, items);
+      res.status(200).json({docs:expedientes});
+    } catch (ex) {
+      console.log(ex);
+      res.status(500).json({ status: 'failed' });
+    }
+  } else {
+    return res.status(403).json({status:'error', msg:'Not a valid item value (10,15,20)'});
+  }
+
+});
+
+//______________________________________//
+
 //*******************GET DE BUSQUEDA(METODO BUSCAR)
 //***********byid/1
 //***********byid/1:{id}
@@ -100,24 +124,37 @@ router.delete('/delete/:id', async (req, res) =>{
     }
 });
 
+//______________________UPDATETAG_______________________________
+router.put('/addtag/:id', async (req, res) =>{
+    try {
+        const {tag} = req.body;
+        const {id} = req.params;
+        const result = await PacienteModel.updateAddTag(id, tag );
+        res.status(200).json({
+            status:'ok',
+            result
+        });
+    } catch (ex) {
+        console.log(ex);
+        res.status(500).json({status:'failed'});
+    }
+});
 
-
-// router.post('/new', async (req, res)=>{
-//     const { identidad, fecha, descripcion, observacion, registro, ultimoActualizacion } = req.body;
-
-//     res.status(200).json(
-//         {
-//             status:'ok',
-//             recieved: {
-//                 identidad,
-//                 fecha,
-//                 descripcion,
-//                 observacion,
-//                 registro,
-//                 ultimoActualizacion
-//             }
-//         });
-// });
+//ADDTAGSET UTILIZAR ESTE
+router.put('/addtagset/:id', async (req, res) =>{
+    try {
+        const {tag} = req.body;
+        const {id} = req.params;
+        const result = await ExpedienteModel.updateAddTagSet(id, tag );
+        res.status(200).json({
+            status:'ok',
+            result
+        });
+    } catch (ex) {
+        console.log(ex);
+        res.status(500).json({status:'failed'});
+    }
+});
 
 
 

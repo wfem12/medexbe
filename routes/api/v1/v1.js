@@ -3,21 +3,22 @@ const router = express.Router();
 const { verifyApiHeaderToken } =
 require('./headerVerifyMiddleware');
 
-//const midlewar = require('./headerVerifyMiddleware');
+const {passport, jwtMiddleware} = require('./seguridad/jwtHelper');
 
 //*****routes*****
 const pacientesRoutes = require('./pacientes/pacientes');
 const expedientesRoutes = require('./expedientes/expedientes');
+const seguridadRoutes = require('./seguridad/seguridad');
 
-// const expedientesRoutes = require('./expedientes/expedientes);
-//middlewares
+//public
+router.use('/seguridad', seguridadRoutes);
 
 // *****LLAMADA*****
-//router.use('/pacientes', pacientesRoutes);
 
 router.use(
     '/pacientes',
     verifyApiHeaderToken,
+    jwtMiddleware,
     pacientesRoutes);
 
 
