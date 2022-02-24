@@ -1,5 +1,5 @@
 const ObjectId = require('mongodb').ObjectId;
-const getDb = require('../mongodb');
+const getDb = require('../mogodb');
 const bcrypt = require('bcryptjs');
 
 let db = null;

@@ -11,7 +11,7 @@ const expedientesRoutes = require('./expedientes/expedientes');
 const seguridadRoutes = require('./seguridad/seguridad');
 
 //public
-router.use('/seguridad', seguridadRoutes);
+router.use('/seguridad', verifyApiHeaderToken, seguridadRoutes);
 
 // *****LLAMADA*****
 
