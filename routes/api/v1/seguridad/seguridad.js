@@ -40,7 +40,7 @@ router.post('/login', async (req, res)=>{
     }
   } catch (ex) {
     console.log(ex);
-    res.status(500).json({status: 'failed'});
+    res.status(500).json({status: 'failed', ex});
   }
 });
 

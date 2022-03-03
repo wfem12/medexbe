@@ -60,6 +60,7 @@ class Usuarios {
   }
   async getByEmail(email) {
     const filter = {email};
+    console.log(this.collection);
     return await this.collection.findOne(filter);
   }
   async hashPassword(rawPassword){
